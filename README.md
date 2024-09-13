@@ -11,8 +11,8 @@
 * [LICENSE](#license)
 
 ## 概要
-gaudi-iot-sdk-csharpはAzure IoT Hubサービスに接続および管理されるアプリケーションの構築を容易にするコードを含む統括パッケージである。
-このリポジトリはGAUDI-Commonsのコードである。
+gaudi-iot-sdk-csharpは、azure-iot-sdk-csharpをベースに一部カスタムを行ったSDKパッケージを含むパッケージです。
+gaudi-iot-sdk-csharpは、Azure IoT Hubサービスに接続および管理されるアプリケーションの構築を容易にするコードを含む統括パッケージです。
 
 ## Quick Start
 

@@ -1,0 +1,39 @@
+name: Publish NuGet Package
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    # .NETのセットアップ
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+      
+    # パッケージ復元
+    - name: Restore dependencies
+      run: dotnet restore ./iothub/device/src/Microsoft.Azure.Devices.Client.csproj
+
+    # ビルド
+    - name: Build
+      run: dotnet build --no-restore -c Release ./iothub/device/src/Microsoft.Azure.Devices.Client.csproj
+
+    # テスト
+    - name: Test
+      run: dotnet test --no-build -c Release ./iothub/device/tests/Microsoft.Azure.Devices.Client.Tests.csproj
+    
+    # パッケージ公開
+    - name: Publish package
+      env:
+        VERSION: ${{ github.event.release.tag_name }}
+      run: |
+        dotnet pack --no-build -c Release -o nupkg ./iothub/device/src/Microsoft.Azure.Devices.Client.csproj /p:PackageVersion=${{ env.VERSION }}
+        dotnet nuget push "nupkg/*.nupkg" --api-key ${{secrets.GITHUB_TOKEN}} --source "https://nuget.pkg.github.com/Project-GAUDI/index.json" --skip-duplicate
