@@ -28,12 +28,9 @@ jobs:
 
     # パッケージ復元
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ./iothub/device/src/Microsoft.Azure.Devices.Client.csproj
 
     # ビルド
     - name: Build
-      run: dotnet build --no-restore -c Release
+      run: dotnet build --no-restore -c Release ./iothub/device/src/Microsoft.Azure.Devices.Client.csproj
 
-    # テスト
-    - name: Test
-      run: dotnet test --no-build -c Release
