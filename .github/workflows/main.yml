@@ -36,4 +36,4 @@ jobs:
 
     # テスト
     - name: Test
-      run: dotnet test --no-build -c Release ./iothub/device/test/Microsoft.Azure.Devices.Client.Tests.csproj
+      run: dotnet test --no-build -c Release ./iothub/device/tests/Microsoft.Azure.Devices.Client.Tests.csproj
