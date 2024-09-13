@@ -17,6 +17,9 @@
     <RootDir>$(MSBuildProjectDirectory)\..\..\..</RootDir>
     <!-- Suppress framework end of life warnings as we have to keep supporting these frameworks for our customers -->
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
+    <Authors>TOYOTA INDUSTRIES CORPORATION</Authors>
+    <Company>TOYOTA INDUSTRIES CORPORATION</Company>
+    <Copyright>© TOYOTA INDUSTRIES CORPORATION. All rights reserved.</Copyright>
   </PropertyGroup>
 
   <!-- delay sign the assembly for Release build -->
