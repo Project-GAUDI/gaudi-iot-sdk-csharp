@@ -1,0 +1,39 @@
+name: Build and Test
+
+on:
+  pull_request:
+    branches: 
+      - 'develop'
+      - main
+    paths-ignore:
+      - '**/*.md'
+  push:
+    branches:
+      - 'develop'
+      - main
+    paths-ignore:
+      - '**/*.md'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v4
+
+    # .NETのセットアップ
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x' # .NETバージョンに応じて調整
+
+    # パッケージ復元
+    - name: Restore dependencies
+      run: dotnet restore
+
+    # ビルド
+    - name: Build
+      run: dotnet build --no-restore -c Release
+
+    # テスト
+    - name: Test
+      run: dotnet test --no-build -c Release
